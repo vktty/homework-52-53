@@ -3,7 +3,7 @@ import { redirect } from "react-router";
 import { DashboardLayout } from "../layouts";
 
 export const dashboardRoute = {
-    path: '/',
+    path: '#/',
     Component: DashboardLayout,
     children: [
         {
