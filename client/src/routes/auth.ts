@@ -6,7 +6,7 @@ import { store } from "../store";
 import { authAPI } from "../store/auth";
 
 export const authRoute = {
-    path: '#/auth',
+    path: '/auth',
     Component: AuthLayout,
     children: [
         {
