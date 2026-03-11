@@ -1,1 +1,1 @@
-export { validationSchema } from './validation'
+export { signUpValidationSchema, signInValidationSchema } from './validation'

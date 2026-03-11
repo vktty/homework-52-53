@@ -1,12 +1,14 @@
 import { useFormik } from "formik"
 import { useNavigate } from "react-router"
+import { Tooltip } from "antd"
 
-import type { IUserSignIn} from "../../interfaces"
-import { validationSchema } from "../../utils"
+import type { IUserSignIn } from "../../interfaces"
+import { signInValidationSchema } from "../../utils"
+import { SignInButtonForm } from "../../components/button"
+import './style.scss'
 
 export const SignIn = () => {
     const navigate = useNavigate()
-
 
     const initialValues: IUserSignIn = {
         email: '',
@@ -19,23 +21,41 @@ export const SignIn = () => {
 
     const formik = useFormik({
         initialValues,
-        validationSchema,
+        validationSchema: signInValidationSchema,
         onSubmit
     })
 
     return (
         <>
-            <form onSubmit={formik.handleSubmit}>
-                <label className='required'>Email:</label>
-                <input type="email" placeholder="Email" {...formik.getFieldProps('email')} />
-                {formik.errors.email && formik.touched.email && <span className='error'>{formik.errors.email}</span>}
+            <div className="form">
+                <form onSubmit={formik.handleSubmit}>
+                    <h2>Sign In</h2>
+                    <div className='form__item'>
+                        <Tooltip
+                            color={'#ffc53d'}
+                            title={formik.touched.email && formik.errors.email}
+                            open={formik.touched.email && !!formik.errors.email}
+                            placement="right"
+                        >
+                            <input type="email" placeholder="Email" {...formik.getFieldProps('email')} />
+                        </Tooltip>
+                    </div>
 
-                <label className='required'>Password:</label>
-                <input type="password" placeholder="Password" {...formik.getFieldProps('password')} />
-                {formik.errors.password && formik.touched.password && <span className='error'>{formik.errors.password}</span>}
+                    <div className='form__item'>
+                        <Tooltip
+                            color={'#ffc53d'}
+                            title={formik.touched.password && formik.errors.password}
+                            open={formik.touched.password && !!formik.errors.password}
+                            placement="right"
+                        >
+                            <input type="password" placeholder="Password" {...formik.getFieldProps('password')} />
+                        </Tooltip>
+                    </div>
 
-                <button type="submit">Sign Up</button>
-            </form>
+                    <SignInButtonForm />
+                </form>
+            </div>
+
         </>
     )
 }

@@ -9,7 +9,7 @@ export const dashboardRoute = {
         {
             index: true,
             middleware: [() => {
-                return redirect('#/boards')
+                return redirect('/boards')
             }]
         },
         {

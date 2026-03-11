@@ -1,47 +1,79 @@
 import { useFormik } from 'formik'
 import { useNavigate } from 'react-router'
+import { Tooltip } from 'antd'
 
 import type { IUserSignUp } from '../../interfaces'
-import { validationSchema } from '../../utils'
+import { signUpValidationSchema } from '../../utils'
+import { SignUpButtonForm } from '../../components/button'
+import './style.scss'
 
 export const SignUp = () => {
     const navigate = useNavigate()
-
-
     const initialValues: IUserSignUp = {
         name: '',
         email: '',
         password: ''
     }
-
     const onSubmit = () => {
         navigate('/boards')
     }
 
     const formik = useFormik({
         initialValues,
-        validationSchema,
+        validationSchema: signUpValidationSchema,
         onSubmit
     })
 
     return (
         <>
-            <form onSubmit={formik.handleSubmit}>
-                <label className='required'>Name:</label>
-                <input type="text" placeholder="Name" {...formik.getFieldProps('name')} />
-                {formik.errors.name && formik.touched.name && <span className='error'>{formik.errors.name}</span>}
+            <div className='form'>
+                <form onSubmit={formik.handleSubmit}>
+                    <h2>Sign Up</h2>
+                    <div className='form__item'>
+                        <Tooltip
+                            color={'#ffc53d'}
+                            title={formik.touched.name && formik.errors.name}
+                            open={formik.touched.name && !!formik.errors.name}
+                            placement="right"
+                        >
+                            <input
+                                type="text"
+                                placeholder="Name"
+                                {...formik.getFieldProps("name")}
+                            />
+                        </Tooltip>
+                    </div>
 
+                    <div className='form__item'>
+                        <Tooltip
+                            color={'#ffc53d'}
+                            title={formik.touched.email && formik.errors.email}
+                            open={formik.touched.email && !!formik.errors.email}
+                            placement="right"
+                        >
+                            <input type="email"
+                                placeholder="Email"
+                                {...formik.getFieldProps('email')} />
+                        </Tooltip>
+                    </div>
 
-                <label className='required'>Email:</label>
-                <input type="email" placeholder="Email" {...formik.getFieldProps('email')} />
-                {formik.errors.email && formik.touched.email && <span className='error'>{formik.errors.email}</span>}
+                    <div className='form__item'>
+                        <Tooltip
+                            color={'#ffc53d'}
+                            title={formik.touched.password && formik.errors.password}
+                            open={formik.touched.password && !!formik.errors.password}
+                            placement="right"
+                        >
+                            <input type="password"
+                                placeholder="Password"
+                                {...formik.getFieldProps('password')} />
+                        </Tooltip>
+                    </div>
 
-                <label className='required'>Password:</label>
-                <input type="password" placeholder="Password" {...formik.getFieldProps('password')} />
-                {formik.errors.password && formik.touched.password && <span className='error'>{formik.errors.password}</span>}
+                    <SignUpButtonForm />
+                </form>
+            </div>
 
-                <button type="submit">Sign Up</button>
-            </form>
         </>
     )
 }

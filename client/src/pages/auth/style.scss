@@ -1,0 +1,46 @@
+.form {
+    margin: 0 auto;
+    margin-top: 8%;
+    padding: 30px;
+    max-width: 40%;
+
+    border: 3px solid #ffd666;
+    border-radius: 20px;
+
+    background-color: #fff1b8;
+
+    h2 {
+        margin: 0 0 15px 0;
+        color: #613400;
+    }
+
+    &__item{
+        margin: 10px 0;
+        font-size: 20px;
+        font-weight: 500;
+        color: #613400;
+
+        input {
+            border: 2px solid #ffd666;
+            border-radius: 10px;
+            padding: 5px;
+            padding-left: 10px;
+
+            &::placeholder {
+                color: #613400;
+                opacity: 0.5;
+            }
+
+            &:focus {
+                outline: none;
+                border: 2px solid #ffc53d;
+                box-shadow: 0 0 10px #faad14;
+            }
+        }
+    }
+
+    button {
+        margin-top: 20px;
+        padding: 0 60px;
+    }
+}

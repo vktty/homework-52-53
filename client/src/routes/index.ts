@@ -1,18 +1,17 @@
-import { createHashRouter, redirect } from 'react-router'
+import { createBrowserRouter, redirect } from 'react-router'
 import { dashboardRoute } from './dashboard'
-import { authRoute, authMiddleware } from './auth'
+import { authRoute } from './auth'
 
 
-export const routes = createHashRouter([
+export const routes = createBrowserRouter([
     authRoute,
     {
-        middleware: [authMiddleware],
         children: [dashboardRoute]
     },
     {
         path: '*',
         middleware: [() => {
-            return redirect('#/auth/sign-in')
+            return redirect('/auth/sign-in')
         }]
     }
 ])
