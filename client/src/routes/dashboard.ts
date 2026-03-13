@@ -1,6 +1,7 @@
 import { redirect } from "react-router";
 
 import { DashboardLayout } from "../layouts";
+import { Boards } from "../pages/boards";
 
 export const dashboardRoute = {
     path: '/',
@@ -14,7 +15,7 @@ export const dashboardRoute = {
         },
         {
             path: 'boards',
-            // Component:,
+            Component: Boards,
             children: [
                 {
                     path: 'create',
