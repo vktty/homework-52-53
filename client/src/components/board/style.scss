@@ -1,0 +1,22 @@
+.board-wrapper {
+    margin: 40px;
+}
+
+.ant-card-head-title {
+    color: #613400;
+}
+
+.board {
+    &__card {
+        border-radius: 20px;
+        border: 1px solid #ffe58f;
+        color: #874d00;
+    }
+
+    &__button {
+        font-size: 13px;
+        width: 160px;
+        margin-top: 15px;
+        align-self: flex-end;
+    }
+}

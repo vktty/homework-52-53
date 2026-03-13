@@ -1,28 +1,28 @@
-import { useFormik } from 'formik'
-import { useNavigate } from 'react-router'
-import { Tooltip } from 'antd'
+import { useFormik } from 'formik';
+import { useNavigate } from 'react-router';
+import { Tooltip } from 'antd';
 
-import type { IUserSignUp } from '../../interfaces'
-import { signUpValidationSchema } from '../../utils'
-import { SignUpButtonForm } from '../../components/button'
-import './style.scss'
+import type { IUserSignUp } from '../../interfaces';
+import { signUpValidationSchema } from '../../utils';
+import { SignUpButtonForm } from '../../components';
+import './style.scss';
 
 export const SignUp = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const initialValues: IUserSignUp = {
         name: '',
         email: '',
-        password: ''
-    }
+        password: '',
+    };
     const onSubmit = () => {
-        navigate('/boards')
-    }
+        navigate('/boards');
+    };
 
     const formik = useFormik({
         initialValues,
         validationSchema: signUpValidationSchema,
-        onSubmit
-    })
+        onSubmit,
+    });
 
     return (
         <>
@@ -34,12 +34,11 @@ export const SignUp = () => {
                             color={'#ffc53d'}
                             title={formik.touched.name && formik.errors.name}
                             open={formik.touched.name && !!formik.errors.name}
-                            placement="right"
-                        >
+                            placement='right'>
                             <input
-                                type="text"
-                                placeholder="Name"
-                                {...formik.getFieldProps("name")}
+                                type='text'
+                                placeholder='Name'
+                                {...formik.getFieldProps('name')}
                             />
                         </Tooltip>
                     </div>
@@ -49,31 +48,38 @@ export const SignUp = () => {
                             color={'#ffc53d'}
                             title={formik.touched.email && formik.errors.email}
                             open={formik.touched.email && !!formik.errors.email}
-                            placement="right"
-                        >
-                            <input type="email"
-                                placeholder="Email"
-                                {...formik.getFieldProps('email')} />
+                            placement='right'>
+                            <input
+                                type='email'
+                                placeholder='Email'
+                                {...formik.getFieldProps('email')}
+                            />
                         </Tooltip>
                     </div>
 
                     <div className='form__item'>
                         <Tooltip
                             color={'#ffc53d'}
-                            title={formik.touched.password && formik.errors.password}
-                            open={formik.touched.password && !!formik.errors.password}
-                            placement="right"
-                        >
-                            <input type="password"
-                                placeholder="Password"
-                                {...formik.getFieldProps('password')} />
+                            title={
+                                formik.touched.password &&
+                                formik.errors.password
+                            }
+                            open={
+                                formik.touched.password &&
+                                !!formik.errors.password
+                            }
+                            placement='right'>
+                            <input
+                                type='password'
+                                placeholder='Password'
+                                {...formik.getFieldProps('password')}
+                            />
                         </Tooltip>
                     </div>
 
                     <SignUpButtonForm />
                 </form>
             </div>
-
         </>
-    )
-}
+    );
+};
