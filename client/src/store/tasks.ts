@@ -46,8 +46,8 @@ export const tasksAPI = createApi({
             invalidatesTags: ['Task'],
         }),
         deleteTask: build.mutation<TaskDeleteResponse, string>({
-            query: (taskID) => ({
-                url: `/${taskID}`,
+            query: (taskId) => ({
+                url: `/${taskId}`,
                 method: 'DELETE',
             }),
             async onQueryStarted(arg, { dispatch, queryFulfilled }) {

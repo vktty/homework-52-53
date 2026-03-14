@@ -1,3 +1,6 @@
+import { useNavigate } from 'react-router';
+
 export const Logo = () => {
-    return <h1>TasksManager</h1>;
+    const navigate = useNavigate();
+    return <h1 onClick={() => navigate('/auth/sign-in')}>TasksManager</h1>;
 };

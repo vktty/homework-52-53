@@ -3,6 +3,7 @@ import { redirect } from 'react-router';
 import { DashboardLayout } from '../layouts';
 import { BoardsPage } from '../pages/boards';
 import { TasksPage } from '../pages/tasks';
+import { CreateBoard, CreateTask } from '../pages/create';
 
 export const dashboardRoute = {
     path: '/',
@@ -12,7 +13,7 @@ export const dashboardRoute = {
             index: true,
             middleware: [
                 () => {
-                    return redirect('/boards');
+                    return redirect('boards');
                 },
             ],
         },
@@ -22,7 +23,7 @@ export const dashboardRoute = {
             children: [
                 {
                     path: 'create',
-                    // Component:,
+                    Component: CreateBoard,
                 },
                 {
                     path: ':boardId/edit',
@@ -46,7 +47,7 @@ export const dashboardRoute = {
         },
         {
             path: 'tasks/create',
-            // Component:,
+            Component: CreateTask,
         },
     ],
 };

@@ -1,4 +1,4 @@
-import { Outlet, useNavigate } from 'react-router';
+import { Outlet, useNavigate, useParams } from 'react-router';
 import { Button, Flex, Layout } from 'antd';
 
 import { Logo } from '../components';
@@ -7,6 +7,15 @@ import { PlusOutlined } from '@ant-design/icons';
 export const DashboardLayout = () => {
     const { Header, Content, Footer } = Layout;
     const navigate = useNavigate();
+    const { boardId } = useParams();
+
+    const handleClick = () => {
+        if (!boardId) {
+            navigate('/boards/create');
+        } else {
+            navigate('/tasks/create');
+        }
+    };
 
     return (
         <Layout className=''>
@@ -18,7 +27,7 @@ export const DashboardLayout = () => {
                             color='orange'
                             variant='solid'
                             size='large'
-                            onClick={() => navigate('/boards/create')}
+                            onClick={handleClick}
                             className='create'>
                             Create <PlusOutlined className='create__icon' />
                         </Button>

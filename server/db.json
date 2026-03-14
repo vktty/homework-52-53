@@ -92,7 +92,7 @@
       "id": "4f32a8b9-1e7d-4c5f-9b2a-0d8c3f4e5a6b",
       "title": "Alex's task #1",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
-      "workflow": "todo",
+      "workflow": "progress",
       "boardId": "d60275d0-b457-4531-85f9-8a98316b3433",
       "authorId": "37d42238-a84d-47c4-8030-e3d0e91d43de"
     },
@@ -100,7 +100,7 @@
       "id": "5c1b9d0a-2f8e-4d6g-9c3b-1e9d4f5a6b7c",
       "title": "Alex's task #2",
       "description": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.",
-      "workflow": "progress",
+      "workflow": "todo",
       "boardId": "d60275d0-b457-4531-85f9-8a98316b3433",
       "authorId": "37d42238-a84d-47c4-8030-e3d0e91d43de"
     },
@@ -108,7 +108,7 @@
       "id": "6d2c0e1b-3g9f-4e7h-9d4c-2f0e5a6b7c8d",
       "title": "Alex's task #3",
       "description": "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.",
-      "workflow": "done",
+      "workflow": "todo",
       "boardId": "d60275d0-b457-4531-85f9-8a98316b3433",
       "authorId": "37d42238-a84d-47c4-8030-e3d0e91d43de"
     },
@@ -116,7 +116,7 @@
       "id": "7e3d1f2c-4h0g-5f8i-9e5d-3g1f6b7c8d9e",
       "title": "Alex's task #4",
       "description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.",
-      "workflow": "todo",
+      "workflow": "done",
       "boardId": "d60275d0-b457-4531-85f9-8a98316b3433",
       "authorId": "37d42238-a84d-47c4-8030-e3d0e91d43de"
     },
@@ -124,7 +124,7 @@
       "id": "8f4e2g3d-5i1h-6g9j-9f6e-4h2g7c8d9e0f",
       "title": "Alex's task #5",
       "description": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias.",
-      "workflow": "progress",
+      "workflow": "done",
       "boardId": "d60275d0-b457-4531-85f9-8a98316b3433",
       "authorId": "37d42238-a84d-47c4-8030-e3d0e91d43de"
     },
@@ -140,7 +140,7 @@
       "id": "a06g4i5f-7k3j-8i1l-9h8g-6j4i9e0f1g2h",
       "title": "Alex's task #7",
       "description": "Et harum quidem rerum facilis est et expedita distinctio.",
-      "workflow": "done",
+      "workflow": "progress",
       "boardId": "d60275d0-b457-4531-85f9-8a98316b3433",
       "authorId": "37d42238-a84d-47c4-8030-e3d0e91d43de"
     },
@@ -164,7 +164,7 @@
       "id": "d39j7l8i-a06m-b14o-9k1j-9m7l2h3i4j5k",
       "title": "Alex's task #10",
       "description": "Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.",
-      "workflow": "done",
+      "workflow": "todo",
       "boardId": "d60275d0-b457-4531-85f9-8a98316b3433",
       "authorId": "37d42238-a84d-47c4-8030-e3d0e91d43de"
     },

@@ -1,12 +1,12 @@
 import { useNavigate } from 'react-router';
 import type { IBoard } from '../../interfaces';
-import { Button, Card, Flex } from 'antd';
+import { Button, Card } from 'antd';
 
 export const BoardComponent = ({ board }: { board: IBoard }) => {
     const navigate = useNavigate();
     return (
         <Card className='board__card' title={board.name}>
-            <Flex vertical>
+            <div className='board__content'>
                 {board.description}
                 <Button
                     color='orange'
@@ -16,7 +16,7 @@ export const BoardComponent = ({ board }: { board: IBoard }) => {
                     onClick={() => navigate(`/boards/${board.id}/tasks`)}>
                     Check out this board
                 </Button>
-            </Flex>
+            </div>
         </Card>
     );
 };

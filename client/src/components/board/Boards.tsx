@@ -12,8 +12,10 @@ export const Boards = ({ boards }: { boards: IBoard[] }) => {
     ));
 
     return (
-        <div className='board-wrapper'>
-            <Row gutter={[24, 24]}>{boardsComponent}</Row>
+        <div className='board__wrapper'>
+            <Row gutter={[24, 24]} align='stretch'>
+                {boardsComponent}
+            </Row>
         </div>
     );
 };
