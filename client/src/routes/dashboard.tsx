@@ -2,7 +2,7 @@ import { redirect } from 'react-router';
 
 import { DashboardLayout } from '../layouts';
 import { BoardsPage } from '../pages/boards';
-import { TasksPage } from '../pages/tasks';
+import { TaskEdit, TaskOpen, TasksPage } from '../pages/tasks';
 import { CreateBoard, CreateTask } from '../pages/create';
 
 export const dashboardRoute = {
@@ -26,22 +26,16 @@ export const dashboardRoute = {
                     Component: CreateBoard,
                 },
                 {
-                    path: ':boardId/edit',
-                    // Component:,
+                    path: ':boardId/tasks',
+                    Component: TasksPage,
                 },
-            ],
-        },
-        {
-            path: 'boards/:boardId/tasks',
-            Component: TasksPage,
-        },
-        {
-            path: 'tasks/:taskId',
-            // Component:,
-            children: [
                 {
-                    path: 'edit',
-                    // Component:,
+                    path: ':taskId',
+                    Component: TaskOpen,
+                },
+                {
+                    path: ':taskId/edit',
+                    Component: TaskEdit,
                 },
             ],
         },

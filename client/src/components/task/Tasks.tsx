@@ -1,21 +1,23 @@
 import { Col, Row } from 'antd';
+import { useNavigate, useParams } from 'react-router';
+
 import type { ITask } from '../../interfaces';
 import { TaskComponent } from './TaskComponent';
-import './style.scss';
-import { useDeleteBoardMutation, useGetBoardQuery } from '../../store/boards';
-import { useNavigate, useParams } from 'react-router';
+import { useGetBoardQuery } from '../../store/boards';
 import { filterWorkflowCode } from '../../utils';
 import { WorkflowCode, WorkflowLabel } from '../../interfaces/enums';
-import { useTransitionWorkflowMutation } from '../../store/tasks';
+import {
+    useDeleteTaskMutation,
+    useTransitionWorkflowMutation,
+} from '../../store/tasks';
+import './style.scss';
 
 export const Tasks = ({ tasks }: { tasks: ITask[] }) => {
     const { boardId } = useParams();
     const navigate = useNavigate();
     const { data: boardData } = useGetBoardQuery(boardId!);
-
-    const [submitTransition, payloadTransition] =
-        useTransitionWorkflowMutation();
-    const [submitDelete, payloadDelete] = useDeleteBoardMutation();
+    const [submitDelete] = useDeleteTaskMutation();
+    const [submitTransition] = useTransitionWorkflowMutation();
 
     const transitionWorkflow = (taskID: string, workflow: WorkflowCode) => {
         submitTransition({ taskID, body: { workflow } });
@@ -61,7 +63,7 @@ export const Tasks = ({ tasks }: { tasks: ITask[] }) => {
     return (
         <div>
             <h2 className='task__board-name'>
-                {boardData?.data.name || 'UnknownBoard'}
+                {boardData?.data.name || "This board doesn't have a name yet. "}
             </h2>
             <div className='task__wrapper'>
                 <Row gutter={16} align='stretch'>

@@ -3,16 +3,16 @@ import { useGetMeQuery } from '../store/auth';
 import { Loading } from '../components';
 
 export const ProtectedRoute = () => {
-    const { isSuccess, isError, isLoading } = useGetMeQuery();
+    const { data, isError, isLoading } = useGetMeQuery();
     if (isLoading) {
         return <Loading />;
     }
 
-    if (isError || !isSuccess) {
+    if (isError || !data) {
         return <Navigate to={'/auth/sign-in'}></Navigate>;
     }
 
-    if (isSuccess) {
+    if (data) {
         return <Outlet />;
     }
 };

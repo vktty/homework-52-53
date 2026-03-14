@@ -33,7 +33,12 @@
         flex: 1;
     }
 }
-
+.task-open__wrapper {
+    max-width: 1000px;
+    margin: 10px auto;
+    border-radius: 20px;
+    border: 2px solid #fff1b8;
+}
 .task__card .ant-card-body {
     flex: 1;
     display: flex;
