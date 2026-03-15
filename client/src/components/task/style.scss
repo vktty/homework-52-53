@@ -25,12 +25,20 @@
         color: #ad6800;
     }
     &__card {
-        border-radius: 20px;
-        width: 100%;
-        height: 100%;
+        flex: 1;
+        min-height: 250px;
+        max-height: 400px;
+    }
+    &__button {
+        font-size: 15px;
+        margin-top: 30px;
+        margin-left: 40px;
+        align-self: start;
+    }
+    &__card-wrapper {
         display: flex;
         flex-direction: column;
-        flex: 1;
+        gap: 16px;
     }
 }
 .task-open__wrapper {
@@ -48,4 +56,9 @@
     display: flex;
     gap: 16px;
     align-items: stretch;
+}
+
+.task__card-wrapper .ant-card {
+    display: flex;
+    flex-direction: column;
 }

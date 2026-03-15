@@ -5,7 +5,9 @@ import type { ITask } from '../../interfaces';
 import { TaskComponent } from './TaskComponent';
 import { useGetBoardQuery } from '../../store/boards';
 import { filterWorkflowCode } from '../../utils';
-import { WorkflowCode, WorkflowLabel } from '../../interfaces/enums';
+import { WorkflowCode } from '../../interfaces/enums';
+import { toastSuccess } from '../../context';
+import { workflow } from '../../utils';
 import {
     useDeleteTaskMutation,
     useTransitionWorkflowMutation,
@@ -31,30 +33,27 @@ export const Tasks = ({ tasks }: { tasks: ITask[] }) => {
 
     const deleteTask = (taskId: string) => {
         submitDelete(taskId);
+        toastSuccess('Task deleted!');
     };
-
-    const workflow = [
-        { code: WorkflowCode.TODO, label: WorkflowLabel.TODO },
-        { code: WorkflowCode.PROGRESS, label: WorkflowLabel.PROGRESS },
-        { code: WorkflowCode.DONE, label: WorkflowLabel.DONE },
-    ];
 
     const TasksComponent = () => {
         return workflow.map(({ code, label }) => {
             const filteredTasks = filterWorkflowCode(tasks, code);
             return (
-                <Col key={code} className='task__label-column'>
+                <Col key={code} span={8} className='task__label-column'>
                     <h3 className='task__title'>{label}</h3>
-                    {filteredTasks.map((task) => (
-                        <TaskComponent
-                            key={task.id}
-                            transitionWorkflow={transitionWorkflow}
-                            deleteTask={deleteTask}
-                            viewTask={viewTask}
-                            editTask={editTask}
-                            task={task}
-                        />
-                    ))}
+                    <div className='task__card-wrapper'>
+                        {filteredTasks.map((task) => (
+                            <TaskComponent
+                                key={task.id}
+                                transitionWorkflow={transitionWorkflow}
+                                deleteTask={deleteTask}
+                                viewTask={viewTask}
+                                editTask={editTask}
+                                task={task}
+                            />
+                        ))}
+                    </div>
                 </Col>
             );
         });

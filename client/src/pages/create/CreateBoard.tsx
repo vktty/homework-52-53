@@ -1,9 +1,13 @@
-import { Form, Button, Input } from 'antd';
-import './style.scss';
+import { Form, Button, Input, Flex } from 'antd';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
+
+import { toastSuccess } from '../../context';
+import './style.scss';
 
 export const CreateBoard = () => {
     const [form] = Form.useForm();
+    const navigate = useNavigate();
     const [submittable, setSubmittable] = useState(false);
     const values = Form.useWatch([], form);
 
@@ -12,6 +16,16 @@ export const CreateBoard = () => {
             .then(() => setSubmittable(true))
             .catch(() => setSubmittable(false));
     }, [form, values]);
+
+    const handleCreate = () => {
+        toastSuccess('New board created!');
+        navigate(`/boards`);
+    };
+
+    const handleCancel = () => {
+        toastSuccess('Сhanges cancelled!');
+        navigate(`/boards`);
+    };
 
     return (
         <>
@@ -42,13 +56,23 @@ export const CreateBoard = () => {
                     />
                 </Form.Item>
 
-                <Button
-                    color='orange'
-                    variant='solid'
-                    size='large'
-                    disabled={!submittable}>
-                    Create Board
-                </Button>
+                <Flex justify='space-around'>
+                    <Button
+                        color='orange'
+                        variant='outlined'
+                        size='large'
+                        onClick={handleCancel}>
+                        Cancel
+                    </Button>
+                    <Button
+                        color='orange'
+                        variant='solid'
+                        size='large'
+                        disabled={!submittable}
+                        onClick={handleCreate}>
+                        Create Board
+                    </Button>
+                </Flex>
             </Form>
         </>
     );

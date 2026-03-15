@@ -1,10 +1,51 @@
 import { Button, Flex, Form, Input } from 'antd';
 import { useNavigate, useParams } from 'react-router';
+import { useEffect, useState } from 'react';
+
+import { toastError, toastSuccess } from '../../context';
+import { useUpdateTaskMutation } from '../../store/tasks';
+import { getError } from '../../components/error';
 
 export const TaskEdit = () => {
     const [form] = Form.useForm();
-    const { boardId, taskId } = useParams();
     const navigate = useNavigate();
+    const { taskId } = useParams();
+    const [submitTaskEdit, updateTaskEdit] = useUpdateTaskMutation();
+    const [submittable, setSubmittable] = useState(false);
+    const values = Form.useWatch([], form);
+
+    useEffect(() => {
+        form.validateFields({ validateOnly: true })
+            .then(() => setSubmittable(true))
+            .catch(() => setSubmittable(false));
+    }, [values, form]);
+
+    const handleCancel = () => {
+        toastSuccess('Changes cancelled!');
+        navigate(-1);
+    };
+
+    const handleSave = async () => {
+        try {
+            await form.validateFields();
+            await submitTaskEdit({
+                taskID: taskId!,
+                body: {
+                    title: form.getFieldValue('changeName'),
+                    description: form.getFieldValue('changeDescription'),
+                },
+            }).unwrap();
+        } catch (error) {
+            toastError(getError(error));
+        }
+    };
+
+    useEffect(() => {
+        if (updateTaskEdit.isSuccess) {
+            toastSuccess('Changes saved!');
+            navigate(-1);
+        }
+    }, [updateTaskEdit.isSuccess]);
 
     return (
         <>
@@ -29,17 +70,18 @@ export const TaskEdit = () => {
                 <Flex gap={20} justify='center'>
                     <Button
                         color='orange'
-                        variant='solid'
+                        variant='outlined'
                         size='large'
-                        onClick={() => navigate(`/tasks/${taskId}`)}>
-                        Cancel changes
+                        onClick={handleCancel}>
+                        Cancel
                     </Button>
                     <Button
                         color='orange'
                         variant='solid'
                         size='large'
-                        onClick={() => navigate(`/tasks/${taskId}`)}>
-                        Save changes
+                        onClick={handleSave}
+                        disabled={!submittable}>
+                        Save
                     </Button>
                 </Flex>
             </Form>

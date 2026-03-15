@@ -1,5 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
 import type { IUserSignIn, IUserSignUp, AuthResponse } from '../interfaces';
+import { boardsAPI } from './boards';
 
 export const AUTH_API = 'authApi';
 const BASE_URL = 'http://localhost:3000/api/v1/auth';
@@ -24,6 +26,10 @@ export const authAPI = createApi({
                 method: 'POST',
                 body,
             }),
+            async onQueryStarted(_, { dispatch, queryFulfilled }) {
+                await queryFulfilled;
+                dispatch(boardsAPI.util.invalidateTags(['Boards']));
+            },
         }),
         signOut: build.mutation<void, void>({
             query: (body) => ({

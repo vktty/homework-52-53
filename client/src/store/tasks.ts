@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
 import { boardsAPI } from './boards';
 import type { ITask, TaskDeleteResponse, TaskResponse } from '../interfaces';
 import type { WorkflowCode } from '../interfaces/enums';
@@ -6,7 +7,10 @@ import type { WorkflowCode } from '../interfaces/enums';
 export const TASKS_API = 'tasksApi';
 const BASE_URL = 'http://localhost:3000/api/v1/tasks';
 
-type CreateTaskPayload = Pick<ITask, 'title' | 'description'>;
+type CreateTaskPayload = Pick<ITask, 'title' | 'description'> & {
+    boardId: string;
+    workflow: string;
+};
 type EditTaskPayload = {
     taskID: string;
     body: Partial<CreateTaskPayload>;
@@ -36,6 +40,10 @@ export const tasksAPI = createApi({
                 method: 'POST',
                 body,
             }),
+            async onQueryStarted(_, { dispatch, queryFulfilled }) {
+                await queryFulfilled;
+                dispatch(boardsAPI.util.invalidateTags(['BoardTasks']));
+            },
         }),
         updateTask: build.mutation<TaskResponse, EditTaskPayload>({
             query: ({ body, taskID }) => ({
@@ -44,15 +52,19 @@ export const tasksAPI = createApi({
                 body,
             }),
             invalidatesTags: ['Task'],
+            async onQueryStarted(_, { dispatch, queryFulfilled }) {
+                await queryFulfilled;
+                dispatch(boardsAPI.util.invalidateTags(['BoardTasks']));
+            },
         }),
         deleteTask: build.mutation<TaskDeleteResponse, string>({
             query: (taskId) => ({
                 url: `/${taskId}`,
                 method: 'DELETE',
             }),
-            async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+            async onQueryStarted(_, { dispatch, queryFulfilled }) {
                 await queryFulfilled;
-                dispatch(boardsAPI.util.invalidateTags(['Boards']));
+                dispatch(boardsAPI.util.invalidateTags(['BoardTasks']));
             },
         }),
         transitionWorkflow: build.mutation<
@@ -65,9 +77,9 @@ export const tasksAPI = createApi({
                 body,
             }),
             invalidatesTags: ['Task'],
-            async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+            async onQueryStarted(_, { dispatch, queryFulfilled }) {
                 await queryFulfilled;
-                dispatch(boardsAPI.util.invalidateTags(['Boards']));
+                dispatch(boardsAPI.util.invalidateTags(['BoardTasks']));
             },
         }),
     }),

@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+
 import type {
     BoardDeleteResponse,
     BoardListResponse,
@@ -22,7 +23,7 @@ export const boardsAPI = createApi({
         baseUrl: BASE_URL,
         credentials: 'include',
     }),
-    tagTypes: ['Boards'],
+    tagTypes: ['Boards', 'BoardTasks'],
     endpoints: (build) => ({
         getBoards: build.query<BoardListResponse, void>({
             query: () => '/',
@@ -56,7 +57,7 @@ export const boardsAPI = createApi({
         }),
         getBoardTasks: build.query<BoardTasksResponse, string>({
             query: (boardID) => `/${boardID}/tasks`,
-            providesTags: ['Boards'],
+            providesTags: ['BoardTasks'],
         }),
     }),
 });

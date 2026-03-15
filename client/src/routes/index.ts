@@ -1,4 +1,5 @@
 import { createBrowserRouter, redirect } from 'react-router';
+
 import { dashboardRoute } from './dashboard';
 import { authRoute } from './auth';
 import { ProtectedRoute } from './protectedRoute';

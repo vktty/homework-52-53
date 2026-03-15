@@ -3,11 +3,14 @@ import { Button, Flex, Layout } from 'antd';
 
 import { Logo } from '../components';
 import { PlusOutlined } from '@ant-design/icons';
+import { useSignOutMutation } from '../store/auth';
+import { toastSuccess } from '../context';
 
 export const DashboardLayout = () => {
     const { Header, Content, Footer } = Layout;
     const navigate = useNavigate();
     const { boardId } = useParams();
+    const [submitSignOut] = useSignOutMutation();
 
     const handleClick = () => {
         if (!boardId) {
@@ -15,6 +18,12 @@ export const DashboardLayout = () => {
         } else {
             navigate('/tasks/create');
         }
+    };
+
+    const handleSignOut = () => {
+        navigate('/auth/sign-in');
+        toastSuccess('Signed out!');
+        submitSignOut();
     };
 
     return (
@@ -36,7 +45,7 @@ export const DashboardLayout = () => {
                         color='orange'
                         variant='solid'
                         size='large'
-                        onClick={() => navigate('/auth/sign-in')}>
+                        onClick={handleSignOut}>
                         Sign Out
                     </Button>
                 </Flex>

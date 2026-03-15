@@ -1,7 +1,9 @@
-import { Button, Card } from 'antd';
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import { useNavigate, useParams } from 'react-router';
+import { Button, Card, Flex } from 'antd';
+import { DeleteOutlined, EditOutlined, LeftOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router';
+
 import type { ITask } from '../../interfaces';
+import './style.scss';
 
 interface TaskOpentProps {
     task: ITask;
@@ -16,7 +18,6 @@ export const TaskOpenComponent = ({
 }: TaskOpentProps) => {
     const { id, title, description } = task;
     const navigate = useNavigate();
-    const { boardId } = useParams();
 
     const actions = [
         <EditOutlined
@@ -29,9 +30,22 @@ export const TaskOpenComponent = ({
         />,
     ];
 
+    const handleClick = () => {
+        navigate(-1);
+    };
+
     return (
         <>
-            <div>
+            <Flex vertical>
+                <Button
+                    color='orange'
+                    variant='outlined'
+                    icon={<LeftOutlined />}
+                    onClick={handleClick}
+                    className='task__button'>
+                    Go back to tasks
+                </Button>
+
                 <Card
                     title={title}
                     key={id}
@@ -39,14 +53,7 @@ export const TaskOpenComponent = ({
                     actions={actions}>
                     {description}
                 </Card>
-                <Button
-                    color='orange'
-                    variant='solid'
-                    size='large'
-                    onClick={() => navigate(`boards/${boardId}/tasks`)}>
-                    Go back to tasks
-                </Button>
-            </div>
+            </Flex>
         </>
     );
 };

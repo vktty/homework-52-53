@@ -1,19 +1,10 @@
 import { toast } from 'react-toastify';
 import './style.scss';
 
-interface IToastParams {
-    message: string;
-    className: string;
-    progressClassName: string;
-}
+export const toastError = (message: string) => {
+    return toast.error(message);
+};
 
-export const Toastify = ({
-    message,
-    className,
-    progressClassName,
-}: IToastParams) => {
-    return toast(message, {
-        className: className,
-        progressClassName: progressClassName,
-    });
+export const toastSuccess = (message: string) => {
+    return toast.success(message);
 };

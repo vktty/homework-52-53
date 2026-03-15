@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+
 import { authAPI } from './auth';
 import { boardsAPI } from './boards';
 import { tasksAPI } from './tasks';

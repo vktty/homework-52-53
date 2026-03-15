@@ -1,35 +1,36 @@
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router';
 import { Tooltip } from 'antd';
+import { useEffect } from 'react';
 
 import type { IUserSignIn } from '../../interfaces';
 import { signInValidationSchema } from '../../utils';
 import { SignInButtonForm } from '../../components';
-import './style.scss';
 import { useSignInMutation } from '../../store/auth';
+import { toastError, toastSuccess } from '../../context';
+import { getError } from '../../components/error';
+import './style.scss';
 
 export const SignIn = () => {
     const navigate = useNavigate();
-    const [signIn] = useSignInMutation();
+    const [signIn, { isError, error, isSuccess }] = useSignInMutation();
 
     const initialValues: IUserSignIn = {
         email: '',
         password: '',
     };
 
-    // const onSubmit = () => {
-    //     navigate('/boards');
-    // };
-
-    const onSubmit = async (values: IUserSignIn) => {
-        try {
-            await signIn(values).unwrap();
-
-            navigate('/boards');
-        } catch (error) {
-            console.error(error);
-        }
+    const onSubmit = (values: IUserSignIn) => {
+        signIn(values).unwrap();
     };
+
+    useEffect(() => {
+        if (isSuccess) {
+            toastSuccess('Welcome back!');
+            navigate('/boards');
+        }
+        if (isError) toastError(getError(error));
+    }, [isSuccess]);
 
     const formik = useFormik({
         initialValues,
