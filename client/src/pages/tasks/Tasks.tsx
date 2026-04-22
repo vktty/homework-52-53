@@ -6,18 +6,21 @@ import { Tasks } from '../../components/task';
 import { getError } from '../../components/error';
 
 export const TasksPage = () => {
-    const { boardId } = useParams<{ boardId: string }>();
-    const { data, isLoading, isError, error } = useGetBoardTasksQuery(boardId!);
-    const outlet = useOutlet();
-
-    if (outlet) return <Outlet />;
-
-    return (
-        <>
-            {isLoading && <Loading />}
-            {isError && <Error subTitle={getError(error)} />}
-            {data?.data.length === 0 && <NoTasks />}
-            {data && <Tasks tasks={data.data} />}
-        </>
-    );
+	const { boardId } = useParams<{ boardId: string }>();
+	const { data, isLoading, isError, error } = useGetBoardTasksQuery(
+		boardId!,
+	);
+	const outlet = useOutlet();
+	if (outlet) return <Outlet />;
+	return (
+		<>
+			{isLoading && <Loading />}
+			{isError && <Error subTitle={getError(error)} />}
+			{Array.isArray(data) && data.length === 0 && (
+				<NoTasks />
+			)}
+			{!data && <NoTasks />}
+			{data && <Tasks tasks={data.data} />}
+		</>
+	);
 };
