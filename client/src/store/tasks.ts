@@ -85,7 +85,7 @@ export const tasksAPI = createApi({
 		>({
 			query: ({ body, taskID }) => ({
 				url: `/${taskID}/workflow`,
-				method: 'PUT',
+				method: 'PATCH',
 				body,
 			}),
 			invalidatesTags: ['Task'],
