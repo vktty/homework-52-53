@@ -1,37 +1,27 @@
 .board {
-    &__wrapper {
-        margin: 40px;
-    }
-    &__card {
-        width: 100%;
-        height: 100%;
-        border-radius: 20px;
-        border: 1px solid #ffe58f;
-        color: #874d00;
-        display: flex;
-        flex-direction: column;
-    }
+	&__wrapper {
+		margin: 40px;
+	}
+	&__card {
+		width: 100%;
+		border-radius: 20px;
+		border: 1px solid #ffe58f;
+		color: #874d00;
+	}
 
-    &__content {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        height: 100%;
-        gap: 16px;
-    }
+	&__content {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
 
-    &__button {
-        font-size: 13px;
-        width: 160px;
-        margin-top: auto;
-        align-self: flex-end;
-    }
+	&__button {
+		font-size: 13px;
+		width: 160px;
+		margin-top: auto;
+		align-self: flex-end;
+	}
 }
 .ant-card-head-title {
-    color: #613400;
-}
-
-.board__card .ant-card-body {
-    flex: 1;
-    display: flex;
+	color: #613400;
 }
